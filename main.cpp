@@ -9,6 +9,8 @@
 #include <iostream>
 #include <fstream>
 
+#include <cassert>
+
 using namespace std;
 
 void input();
@@ -24,20 +26,34 @@ ifstream inFile;
 ofstream outFile;
 
 int main() {
+    //Main
+
+    //Precondition:
+    //N/A; No assert statement needed.
+    //Postcondition:
+    //Grade average is printed on the screen and in a ouput log.
+
     returnValue = 0;
     input();
+    calculate();
+    output();
     return returnValue;
 }
 
 void input() {
     //Input
 
+    //Precondition:
+    //N/A; No assert statement required.
+    //Postcondition:
+    //All files are opened. The grade amount and the grades have been stored in variables.
+
     inFile.open("grades.dat");
     if(!inFile) {
         cout << "Error 1: Stream Failed. Perhaps the input file doesn't exist?";
         returnValue = 1;
         return;
-    }
+    } //if
     outFile.open("average.dat");
     for(int i = 0; i <50; i++) {
         inFile >> grades[i];
@@ -45,20 +61,25 @@ void input() {
             cout << "Error 1: Stream Failed. " << grades[i] << " in \"grades.dat\" contains invalid data.";
             returnValue = 1;
             return;
-        }
-    }
+        } //if
+    } //for
     inFile >> gradeAmount;
     if(!inFile) {
         cout << "Error 1: Stream failed. The grade amount contains invalid data.";
         returnValue = 1;
         return;
-    }
-    calculate();
-    return;
+    } //if
 }
 
 void calculate() {
     //Calculate
+
+    //Precondition:
+    //All files are opened. The grade amount and the grades have been stored in variables. Assert statement(s) required.
+    //Postcondition:
+    //Grade average has been calculated based on the grade amount.
+
+    assert(gradeAmount > 0);
 
     switch(gradeAmount) {
     case 1:
@@ -216,12 +237,18 @@ void calculate() {
         cout << "Error 2: The grade amount is either too large or too small.";
         returnValue = 2;
         return;
-    }
-    output();
+    } //switch
 }
 
 void output() {
     //Output
+
+    //Precondition:
+    //Grade average has been calculated based on the grade amount. Assert statement(s) required.
+    //Postcondition:
+    //Grade average is printed on the screen and in a ouput log.
+
+    assert(average > 0);
 
     cout << "The average of those grades is " << average << endl << endl;
     outFile << "The average of those grades is " << average;
