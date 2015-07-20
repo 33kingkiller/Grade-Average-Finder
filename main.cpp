@@ -1,5 +1,9 @@
 /*
 /This is a test program designed using functional decomposition with the purpose of calculating the average of a set of grades.
+/
+/This program was written by 33kingkiller (aka NerdByFate).
+/
+/This program was last updated 7-19-2015.
 */
 
 #include <iostream>
@@ -7,35 +11,55 @@
 
 using namespace std;
 
+void input();
+void calculate();
+void output();
+
+int returnValue;
+int grades[50];
+int gradeAmount;
+int average;
+
+ifstream inFile;
+ofstream outFile;
+
 int main() {
+    returnValue = 0;
+    input();
+    return returnValue;
+}
+
+void input() {
     //Input
 
-    ifstream inFile;
-    ofstream outFile;
     inFile.open("grades.dat");
     if(!inFile) {
         cout << "Error 1: Stream Failed. Perhaps the input file doesn't exist?";
-        return 1;
+        returnValue = 1;
+        return;
     }
     outFile.open("average.dat");
-    int grades[50];
-    int gradeAmount;
     for(int i = 0; i <50; i++) {
         inFile >> grades[i];
         if(!inFile) {
             cout << "Error 1: Stream Failed. " << grades[i] << " in \"grades.dat\" contains invalid data.";
-            return 1;
+            returnValue = 1;
+            return;
         }
     }
     inFile >> gradeAmount;
     if(!inFile) {
         cout << "Error 1: Stream failed. The grade amount contains invalid data.";
-        return 1;
+        returnValue = 1;
+        return;
     }
+    calculate();
+    return;
+}
 
+void calculate() {
     //Calculate
 
-    int average;
     switch(gradeAmount) {
     case 1:
         average = grades[0];
@@ -190,15 +214,19 @@ int main() {
     default:
         average = -1;
         cout << "Error 2: The grade amount is either too large or too small.";
-        return 2;
+        returnValue = 2;
+        return;
     }
+    output();
+}
 
+void output() {
     //Output
 
     cout << "The average of those grades is " << average << endl << endl;
     outFile << "The average of those grades is " << average;
     cout << "Press any key to continue." << endl;
     cin.get();
-
-    return 0;
+    inFile.close();
+    outFile.close();
 }
