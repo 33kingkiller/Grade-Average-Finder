@@ -36,7 +36,7 @@ int main() {
     return returnValue;
 }
 
-void input(int& returnVal, int& amount) {
+void input(/* inout */ int& returnVal, /* out */ int& amount) {
     //Input
 
     //Precondition:
@@ -69,7 +69,7 @@ void input(int& returnVal, int& amount) {
     inFile.close();
 }
 
-void calculate(int& returnVal, int& ave, int amount) {
+void calculate(/* inout */ int& returnVal, /* inout */ int& ave, /* in */ int amount) {
     //Calculate
 
     //Precondition:
@@ -77,10 +77,10 @@ void calculate(int& returnVal, int& ave, int amount) {
     //Postcondition:
     //Grade average has been calculated based on the grade amount.
 
-    if(!amount > 0 || !amount < 51) {
-        cout << "Error 3: The grade amount is not greater than 0, not less than 51, or both. The following assertion(s) will fail.\n\n";
+    if(!amount > 0) {
+        cout << "Error 3: The grade amount is not greater than 0. The following assertion(s) will fail.\n\n";
         returnVal = 3;
-    }
+    }//if
     assert(amount > 0);
     assert(amount < 51);
 
@@ -243,7 +243,7 @@ void calculate(int& returnVal, int& ave, int amount) {
     } //switch
 }
 
-void output(int& returnVal, int ave) {
+void output(/* inout */ int& returnVal, /* in */ int ave) {
     //Output
 
     //Precondition:
@@ -254,7 +254,7 @@ void output(int& returnVal, int ave) {
     if(!ave > 0) {
         cout << "Error 3: The average is not greater than 0. The following assertion will fail.\n\n";
         returnVal = 3;
-    }
+    } //if
     assert(ave > 0);
 
     ofstream outFile;
