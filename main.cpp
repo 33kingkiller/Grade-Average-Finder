@@ -13,11 +13,9 @@
 
 using namespace std;
 
-void input(int& returnVal, int& amount);
-void calculate(int& returnVal, int& ave, int amount);
+void input(int& returnVal, int& amount, int (&grades)[50]);
+void calculate(int& returnVal, int& ave, int amount, int grades[50]);
 void output(int& returnVal, int ave);
-
-int grades[50];
 
 int main() {
     //Main
@@ -30,13 +28,14 @@ int main() {
     int returnValue = 0;
     int average;
     int gradeAmount;
-    input(returnValue, gradeAmount);
-    calculate(returnValue, average, gradeAmount);
+    int grade[50];
+    input(returnValue, gradeAmount, grade);
+    calculate(returnValue, average, gradeAmount, grade);
     output(returnValue, average);
     return returnValue;
 }
 
-void input(/* inout */ int& returnVal, /* out */ int& amount) {
+void input(/* inout */ int& returnVal, /* out */ int& amount, /* inout */ int (&grades)[50]) {
     //Input
 
     //Precondition:
@@ -69,7 +68,7 @@ void input(/* inout */ int& returnVal, /* out */ int& amount) {
     inFile.close();
 }
 
-void calculate(/* inout */ int& returnVal, /* inout */ int& ave, /* in */ int amount) {
+void calculate(/* inout */ int& returnVal, /* inout */ int& ave, /* in */ int amount, /* in */ int grades[50]) {
     //Calculate
 
     //Precondition:
