@@ -3,7 +3,7 @@
 /
 /This program was written by 33kingkiller (aka NerdByFate).
 /
-/This program was last updated 7-22-2015.
+/This program was last updated 7-24-2015.
 */
 
 #include <iostream>
